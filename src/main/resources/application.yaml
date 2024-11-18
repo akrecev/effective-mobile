@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: testTask
+  datasource:
+    url: jdbc:postgresql://localhost:5432/taskDB
+    username: usr
+    password: pwd
+
