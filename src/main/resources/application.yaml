@@ -7,9 +7,6 @@ spring:
     password: pwd
   flyway:
     enabled: true
-    user: usr
-    password: pwd
-    url: jdbc:postgresql://localhost:5432/taskDB
 
 logging:
   level:
