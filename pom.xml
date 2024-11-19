@@ -30,6 +30,7 @@
 		<java.version>17</java.version>
 		<spotless.plugin.version>2.43.0</spotless.plugin.version>
 		<flyway.plugin.version>10.21.0</flyway.plugin.version>
+		<mapstruct.version>1.5.5.Final</mapstruct.version>
 	</properties>
 	<dependencies>
 		<dependency>

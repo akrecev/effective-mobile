@@ -34,7 +34,7 @@ public class Comment {
     private Task task;
 
     @Transient
-    private User user;
+    private User author;
 
     @PersistenceCreator
     public Comment(Long id, String content, Long taskId, Long authorId) {

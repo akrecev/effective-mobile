@@ -1,11 +1,13 @@
 package ru.akrecev.testTask.model;
 
 import jakarta.annotation.Nonnull;
+import java.util.List;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table("tasks")
@@ -29,6 +31,9 @@ public class Task {
     private final Long authorId;
     private final Long assigneeId;
 
+    @MappedCollection(idColumn = "task_id", keyColumn = "id")
+    private final List<Comment> comments;
+
     @Transient
     private User author;
 
@@ -43,7 +48,8 @@ public class Task {
             TaskStatus status,
             Priority priority,
             Long authorId,
-            Long assigneeId) {
+            Long assigneeId,
+            List<Comment> comments) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -51,10 +57,17 @@ public class Task {
         this.priority = priority;
         this.authorId = authorId;
         this.assigneeId = assigneeId;
+        this.comments = comments;
     }
 
     public Task(
-            String title, String description, TaskStatus status, Priority priority, Long authorId, Long assigneeId) {
-        this(null, title, description, status, priority, authorId, assigneeId);
+            String title,
+            String description,
+            TaskStatus status,
+            Priority priority,
+            Long authorId,
+            Long assigneeId,
+            List<Comment> comments) {
+        this(null, title, description, status, priority, authorId, assigneeId, comments);
     }
 }
