@@ -1,18 +1,20 @@
 package ru.akrecev.testTask.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.ListCrudRepository;
 import ru.akrecev.testTask.model.Priority;
 import ru.akrecev.testTask.model.Task;
 import ru.akrecev.testTask.model.TaskStatus;
 
-import java.util.List;
-
 public interface TaskRepository extends ListCrudRepository<Task, Long> {
-    List<Task> findByAuthorId(Long authorId);
+    Page<Task> findByAuthorId(Long authorId, Pageable pageable);
 
-    List<Task> findByAssigneeId(Long assigneeId);
+    Page<Task> findByAssigneeId(Long assigneeId, Pageable pageable);
 
-    List<Task> findByStatus(TaskStatus status);
+    Page<Task> findByStatus(TaskStatus status, Pageable pageable);
 
-    List<Task> findByPriority(Priority priority);
+    Page<Task> findByPriority(Priority priority, Pageable pageable);
+
+    Page<Task> findAll(Pageable pageable);
 }
