@@ -6,10 +6,10 @@ spring:
     username: usr
     password: pwd
   flyway:
-    enabled: true
+    enabled: false
   sql:
     init:
-      mode: always
+      mode: never
 
 logging:
   level:
