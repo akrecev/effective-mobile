@@ -7,6 +7,9 @@ spring:
     password: pwd
   flyway:
     enabled: true
+  sql:
+    init:
+      mode: always
 
 logging:
   level:
