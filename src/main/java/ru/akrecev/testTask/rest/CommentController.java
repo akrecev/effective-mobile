@@ -1,6 +1,11 @@
 package ru.akrecev.testTask.rest;
 
 import java.util.List;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.akrecev.testTask.dto.CommentDto;
@@ -11,6 +16,7 @@ import ru.akrecev.testTask.model.User;
 import ru.akrecev.testTask.service.CommentService;
 import ru.akrecev.testTask.service.TaskService;
 
+@Tag(name = "Comment Management", description = "APIs for managing comments")
 @RestController
 @RequestMapping("/api/v1/comments")
 @RequiredArgsConstructor
@@ -25,6 +31,14 @@ public class CommentController {
         return commentService.saveComment(comment);
     }
 
+    @Operation(
+            summary = "Get comments by task id",
+            description = "Fetch a list of task's comments",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Successfully fetched comments"),
+                    @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content)
+            }
+    )
     @GetMapping("/{taskId}")
     public List<CommentDto> getCommentsByTask(
             @PathVariable Long taskId,
