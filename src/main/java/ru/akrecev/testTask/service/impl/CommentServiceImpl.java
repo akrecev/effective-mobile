@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import ru.akrecev.testTask.dto.CommentDto;
 import ru.akrecev.testTask.exception.DataNotFoundException;
+import ru.akrecev.testTask.mapper.CommentMapper;
 import ru.akrecev.testTask.model.Comment;
 import ru.akrecev.testTask.model.Task;
 import ru.akrecev.testTask.model.User;
@@ -24,12 +26,12 @@ public class CommentServiceImpl implements CommentService {
     private final TaskRepository taskRepository;
 
     @Override
-    public Comment saveComment(Comment comment) {
-        return commentRepository.save(comment);
+    public CommentDto saveComment(Comment comment) {
+        return CommentMapper.toDto(commentRepository.save(comment));
     }
 
     @Override
-    public List<Comment> findByTaskId(Long taskId, int from, int size) {
+    public List<CommentDto> findByTaskId(Long taskId, int from, int size) {
         List<Comment> comments =
                 commentRepository.findByTaskId(taskId, new MyPageRequest(from, size, Sort.unsorted())).stream()
                         .toList();
@@ -44,6 +46,7 @@ public class CommentServiceImpl implements CommentService {
                         .task(task)
                         .author(userMap.get(comment.getAuthorId()))
                         .build())
+                .map(CommentMapper::toDto)
                 .toList();
     }
 }
