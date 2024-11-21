@@ -13,6 +13,10 @@ spring:
   sql:
     init:
       mode: never
+  security:
+    user:
+      name: user
+      password: pwd
 
 logging:
   level:
