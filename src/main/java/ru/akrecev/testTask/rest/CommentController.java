@@ -4,6 +4,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.akrecev.testTask.dto.CommentDto;
+import ru.akrecev.testTask.exception.DataNotFoundException;
 import ru.akrecev.testTask.model.Comment;
 import ru.akrecev.testTask.model.Task;
 import ru.akrecev.testTask.model.User;
@@ -19,7 +20,7 @@ public class CommentController {
 
     @PostMapping("/{taskId}")
     public CommentDto addComment(@PathVariable Long taskId, @RequestBody Comment comment, User currentUser) {
-        Task task = taskService.findById(taskId).orElseThrow(() -> new RuntimeException("Task not found"));
+        Task task = taskService.findById(taskId).orElseThrow(() -> new DataNotFoundException("Task id=" + taskId));
         comment = comment.toBuilder().task(task).author(currentUser).build();
         return commentService.saveComment(comment);
     }
