@@ -1,8 +1,7 @@
 package ru.akrecev.testTask.service;
 
-import ru.akrecev.testTask.model.Comment;
-
 import java.util.List;
+import ru.akrecev.testTask.model.Comment;
 
 public interface CommentService {
     Comment saveComment(Comment comment);
