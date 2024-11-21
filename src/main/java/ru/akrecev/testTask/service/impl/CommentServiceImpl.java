@@ -14,10 +14,12 @@ import ru.akrecev.testTask.utility.MyPageRequest;
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
 
+    @Override
     public Comment saveComment(Comment comment) {
         return commentRepository.save(comment);
     }
 
+    @Override
     public List<Comment> findByTaskId(Long taskId, int from, int size) {
         return commentRepository.findByTaskId(taskId, new MyPageRequest(from, size, Sort.unsorted())).stream()
                 .toList();
