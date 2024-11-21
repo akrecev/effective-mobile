@@ -31,6 +31,7 @@
 		<spring.boot.docker.compos.version>3.3.4</spring.boot.docker.compos.version>
 		<spotless.plugin.version>2.43.0</spotless.plugin.version>
 		<flyway.plugin.version>10.21.0</flyway.plugin.version>
+		<springdoc.openapi.starter.webmvc.ui.version>2.6.0</springdoc.openapi.starter.webmvc.ui.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -51,7 +52,6 @@
 			<version>${spring.boot.docker.compos.version}</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
@@ -70,6 +70,12 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc.openapi.starter.webmvc.ui.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
