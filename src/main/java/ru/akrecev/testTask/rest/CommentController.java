@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.akrecev.testTask.dto.CommentDto;
 import ru.akrecev.testTask.exception.DataNotFoundException;
@@ -24,7 +25,8 @@ public class CommentController {
     private final TaskService taskService;
 
     @PostMapping("/{taskId}")
-    public CommentDto addComment(@PathVariable Long taskId, @RequestBody Comment comment, User currentUser) {
+    public CommentDto addComment(
+            @PathVariable Long taskId, @RequestBody Comment comment, @AuthenticationPrincipal User currentUser) {
         Task task = taskService.findById(taskId).orElseThrow(() -> new DataNotFoundException("Task id=" + taskId));
         comment = comment.toBuilder().task(task).author(currentUser).build();
         return commentService.saveComment(comment);
@@ -35,7 +37,8 @@ public class CommentController {
             description = "Fetch a list of task's comments",
             responses = {
                 @ApiResponse(responseCode = "200", description = "Successfully fetched comments"),
-                @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content)
+                @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
+                @ApiResponse(responseCode = "404", description = "Data not found", content = @Content)
             })
     @GetMapping("/{taskId}")
     public List<CommentDto> getCommentsByTask(

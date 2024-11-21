@@ -39,7 +39,9 @@ public class CommentServiceImpl implements CommentService {
         Map<Long, User> userMap =
                 userRepository.findByIdIn(authorIdList).stream().collect(Collectors.toMap(User::getId, a -> a));
 
-        Task task = taskRepository.findById(taskId).orElseThrow(() -> new DataNotFoundException("Task id=" + taskId));
+        Task task = taskRepository
+                .findById(taskId)
+                .orElseThrow(() -> new DataNotFoundException("Task id=" + taskId + " not found."));
 
         return comments.stream()
                 .map(comment -> comment.toBuilder()
