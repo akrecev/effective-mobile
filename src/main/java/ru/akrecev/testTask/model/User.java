@@ -42,4 +42,9 @@ public class User {
     public User(String email, String password, String name, Role role) {
         this(null, email, password, name, role);
     }
+
+    @ToString.Include(name = "password")
+    private String maskPassword() {
+        return "********";
+    }
 }

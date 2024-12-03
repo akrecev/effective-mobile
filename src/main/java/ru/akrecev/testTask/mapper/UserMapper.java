@@ -1,12 +1,14 @@
 package ru.akrecev.testTask.mapper;
 
-import lombok.experimental.UtilityClass;
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
 import ru.akrecev.testTask.dto.UserDto;
 import ru.akrecev.testTask.model.User;
 
-@UtilityClass
-public class UserMapper {
-    public static UserDto toDto(User user) {
-        return new UserDto(user.getId(), user.getName(), user.getRole());
-    }
+@Mapper(componentModel = "spring")
+public interface UserMapper {
+    UserDto map(User user);
+
+    @InheritInverseConfiguration
+    User map(UserDto userDto);
 }

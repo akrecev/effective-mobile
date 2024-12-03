@@ -24,10 +24,11 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final TaskRepository taskRepository;
+    private final CommentMapper commentMapper;
 
     @Override
     public CommentDto saveComment(Comment comment) {
-        return CommentMapper.toDto(commentRepository.save(comment));
+        return commentMapper.map(commentRepository.save(comment));
     }
 
     @Override
@@ -48,7 +49,7 @@ public class CommentServiceImpl implements CommentService {
                         .task(task)
                         .author(userMap.get(comment.getAuthorId()))
                         .build())
-                .map(CommentMapper::toDto)
+                .map(commentMapper::map)
                 .toList();
     }
 }
