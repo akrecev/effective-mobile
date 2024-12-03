@@ -7,23 +7,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.akrecev.testTask.dto.CommentDto;
-import ru.akrecev.testTask.exception.DataNotFoundException;
 import ru.akrecev.testTask.mapper.CommentMapper;
 import ru.akrecev.testTask.model.Comment;
 import ru.akrecev.testTask.model.Task;
 import ru.akrecev.testTask.model.User;
 import ru.akrecev.testTask.repository.CommentRepository;
-import ru.akrecev.testTask.repository.TaskRepository;
-import ru.akrecev.testTask.repository.UserRepository;
 import ru.akrecev.testTask.service.CommentService;
+import ru.akrecev.testTask.service.TaskService;
+import ru.akrecev.testTask.service.UserService;
 import ru.akrecev.testTask.utility.MyPageRequest;
 
 @Service
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
-    private final UserRepository userRepository;
-    private final TaskRepository taskRepository;
+    private final UserService userService;
+    private final TaskService taskService;
     private final CommentMapper commentMapper;
 
     @Override
@@ -38,11 +37,9 @@ public class CommentServiceImpl implements CommentService {
                         .toList();
         List<Long> authorIdList = comments.stream().map(Comment::getAuthorId).toList();
         Map<Long, User> userMap =
-                userRepository.findByIdIn(authorIdList).stream().collect(Collectors.toMap(User::getId, a -> a));
+                userService.findByIdIn(authorIdList).stream().collect(Collectors.toMap(User::getId, a -> a));
 
-        Task task = taskRepository
-                .findById(taskId)
-                .orElseThrow(() -> new DataNotFoundException("Task id=" + taskId + " not found."));
+        Task task = taskService.findById(taskId);
 
         return comments.stream()
                 .map(comment -> comment.toBuilder()

@@ -1,13 +1,13 @@
 package ru.akrecev.testTask.service;
 
 import java.util.List;
-import java.util.Optional;
+import ru.akrecev.testTask.dto.TaskDto;
 import ru.akrecev.testTask.model.Task;
 
 public interface TaskService {
-    Task saveTask(Task task);
+    TaskDto saveTask(Task task);
 
-    Optional<Task> findById(Long id);
+    Task findById(Long id);
 
     List<Task> findAll(int from, int size);
 

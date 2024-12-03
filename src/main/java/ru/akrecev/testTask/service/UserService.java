@@ -1,10 +1,15 @@
 package ru.akrecev.testTask.service;
 
-import java.util.Optional;
+import java.util.List;
+import ru.akrecev.testTask.dto.UserDto;
 import ru.akrecev.testTask.model.User;
 
 public interface UserService {
-    Optional<User> findByEmail(String email);
+    UserDto saveUser(User user);
 
-    Optional<User> findById(Long id);
+    User findByEmail(String email);
+
+    User findById(Long id);
+
+    List<User> findByIdIn(List<Long> idList);
 }
