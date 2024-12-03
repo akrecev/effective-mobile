@@ -8,6 +8,6 @@ import lombok.Data;
 public class CommentDto {
     private Long id;
     private String content;
-    private TaskShortDto task;
+    private TaskDto task;
     private UserDto author;
 }
