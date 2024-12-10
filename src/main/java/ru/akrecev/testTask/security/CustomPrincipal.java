@@ -1,11 +1,10 @@
 package ru.akrecev.testTask.security;
 
+import java.security.Principal;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-
-import java.security.Principal;
 
 @RequiredArgsConstructor
 @Builder(toBuilder = true)
