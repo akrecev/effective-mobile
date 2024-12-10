@@ -27,28 +27,28 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task findById(Long id) {
+    public Task getById(Long id) {
         Task task = taskRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Task id=" + id));
-        User author = userService.findById(task.getAuthorId());
-        User assignee = userService.findById(task.getAssigneeId());
+        User author = userService.getById(task.getAuthorId());
+        User assignee = userService.getById(task.getAssigneeId());
 
         return task.toBuilder().author(author).assignee(assignee).build();
     }
 
     @Override
-    public List<Task> findAll(int from, int size) {
+    public List<Task> getAll(int from, int size) {
         return taskRepository.findAll(new MyPageRequest(from, size, Sort.unsorted())).stream()
                 .toList();
     }
 
     @Override
-    public List<Task> findByAuthorId(Long authorId, int from, int size) {
+    public List<Task> getByAuthorId(Long authorId, int from, int size) {
         return taskRepository.findByAuthorId(authorId, new MyPageRequest(from, size, Sort.unsorted())).stream()
                 .toList();
     }
 
     @Override
-    public List<Task> findByAssigneeId(Long assigneeId, int from, int size) {
+    public List<Task> getByAssigneeId(Long assigneeId, int from, int size) {
         return taskRepository.findByAssigneeId(assigneeId, new MyPageRequest(from, size, Sort.unsorted())).stream()
                 .toList();
     }

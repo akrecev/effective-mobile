@@ -31,15 +31,15 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDto> findByTaskId(Long taskId, int from, int size) {
+    public List<CommentDto> getByTaskId(Long taskId, int from, int size) {
         List<Comment> comments =
                 commentRepository.findByTaskId(taskId, new MyPageRequest(from, size, Sort.unsorted())).stream()
                         .toList();
         List<Long> authorIdList = comments.stream().map(Comment::getAuthorId).toList();
         Map<Long, User> userMap =
-                userService.findByIdIn(authorIdList).stream().collect(Collectors.toMap(User::getId, a -> a));
+                userService.getByIdIn(authorIdList).stream().collect(Collectors.toMap(User::getId, a -> a));
 
-        Task task = taskService.findById(taskId);
+        Task task = taskService.getById(taskId);
 
         return comments.stream()
                 .map(comment -> comment.toBuilder()

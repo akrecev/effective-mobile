@@ -22,19 +22,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByEmail(String email) {
+    public User getByEmail(String email) {
         return userRepository
                 .findByEmail(email)
                 .orElseThrow(() -> new DataNotFoundException("User with email=" + email));
     }
 
     @Override
-    public User findById(Long id) {
+    public User getById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new DataNotFoundException("User id=" + id));
     }
 
     @Override
-    public List<User> findByIdIn(List<Long> idList) {
+    public List<User> getByIdIn(List<Long> idList) {
         return userRepository.findByIdIn(idList);
     }
 }

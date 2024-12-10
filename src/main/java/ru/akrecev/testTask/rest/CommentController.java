@@ -26,7 +26,7 @@ public class CommentController {
     @PostMapping("/{taskId}")
     public CommentDto addComment(
             @PathVariable Long taskId, @RequestBody Comment comment, @AuthenticationPrincipal User currentUser) {
-        Task task = taskService.findById(taskId);
+        Task task = taskService.getById(taskId);
         comment = comment.toBuilder().task(task).author(currentUser).build();
         return commentService.saveComment(comment);
     }
@@ -44,6 +44,6 @@ public class CommentController {
             @PathVariable Long taskId,
             @RequestParam(value = "from", defaultValue = "0") Integer from,
             @RequestParam(value = "size", defaultValue = "5") Integer size) {
-        return commentService.findByTaskId(taskId, from, size);
+        return commentService.getByTaskId(taskId, from, size);
     }
 }

@@ -7,5 +7,5 @@ import ru.akrecev.testTask.model.Comment;
 public interface CommentService {
     CommentDto saveComment(Comment comment);
 
-    List<CommentDto> findByTaskId(Long taskId, int from, int size);
+    List<CommentDto> getByTaskId(Long taskId, int from, int size);
 }

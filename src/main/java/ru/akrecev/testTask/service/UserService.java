@@ -7,9 +7,9 @@ import ru.akrecev.testTask.model.User;
 public interface UserService {
     UserDto saveUser(User user);
 
-    User findByEmail(String email);
+    User getByEmail(String email);
 
-    User findById(Long id);
+    User getById(Long id);
 
-    List<User> findByIdIn(List<Long> idList);
+    List<User> getByIdIn(List<Long> idList);
 }

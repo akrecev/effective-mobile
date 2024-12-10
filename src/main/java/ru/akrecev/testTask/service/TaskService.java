@@ -7,13 +7,13 @@ import ru.akrecev.testTask.model.Task;
 public interface TaskService {
     TaskDto saveTask(Task task);
 
-    Task findById(Long id);
+    Task getById(Long id);
 
-    List<Task> findAll(int from, int size);
+    List<Task> getAll(int from, int size);
 
-    List<Task> findByAuthorId(Long authorId, int from, int size);
+    List<Task> getByAuthorId(Long authorId, int from, int size);
 
-    List<Task> findByAssigneeId(Long assigneeId, int from, int size);
+    List<Task> getByAssigneeId(Long assigneeId, int from, int size);
 
     void deleteTask(Long id);
 }
