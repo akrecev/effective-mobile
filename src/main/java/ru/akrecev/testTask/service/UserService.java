@@ -9,6 +9,8 @@ public interface UserService {
 
     User getByEmail(String email);
 
+    User getByName(String name);
+
     User getById(Long id);
 
     List<User> getByIdIn(List<Long> idList);

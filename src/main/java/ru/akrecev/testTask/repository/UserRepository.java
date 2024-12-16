@@ -10,5 +10,7 @@ import ru.akrecev.testTask.model.User;
 public interface UserRepository extends ListCrudRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
+    Optional<User> findByName(String name);
+
     List<User> findByIdIn(List<Long> idList);
 }
