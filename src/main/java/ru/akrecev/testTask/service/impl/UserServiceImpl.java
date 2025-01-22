@@ -30,9 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByName(String name) {
-        return userRepository
-                .findByName(name)
-                .orElseThrow(() -> new DataNotFoundException("User with name=" + name));
+        return userRepository.findByName(name).orElseThrow(() -> new DataNotFoundException("User with name=" + name));
     }
 
     @Override

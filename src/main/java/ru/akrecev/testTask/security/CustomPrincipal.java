@@ -1,7 +1,6 @@
 package ru.akrecev.testTask.security;
 
 import java.security.Principal;
-
 import lombok.*;
 
 @Data
