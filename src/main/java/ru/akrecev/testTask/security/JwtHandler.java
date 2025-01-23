@@ -2,10 +2,9 @@ package ru.akrecev.testTask.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import ru.akrecev.testTask.exception.AuthException;
-
 import java.util.Base64;
 import java.util.Date;
+import ru.akrecev.testTask.exception.AuthException;
 
 public class JwtHandler {
 
