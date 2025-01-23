@@ -9,13 +9,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.akrecev.testTask.exception.AuthException;
 import ru.akrecev.testTask.model.User;
-import ru.akrecev.testTask.service.UserService;
+import ru.akrecev.testTask.repository.UserRepository;
 
 @Component
 @RequiredArgsConstructor
 public class SecurityService {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Value("${jwt.secret}")
@@ -28,10 +28,10 @@ public class SecurityService {
     private String issuer;
 
     public TokenDetails authenticate(String username, String password) {
-        User user = userService.getByName(username);
-        if (user == null) {
-            throw new AuthException("Invalid username", "ADMIN_INVALID_USERNAME");
-        }
+        User user = userRepository
+                .findByName(username)
+                .orElseThrow(() -> new AuthException("Invalid username", "ADMIN_INVALID_USERNAME"));
+
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new AuthException("Invalid password", "ADMIN_INVALID_PASSWORD");
         }
